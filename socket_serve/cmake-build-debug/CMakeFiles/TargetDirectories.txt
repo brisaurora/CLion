@@ -1,0 +1,3 @@
+/home/aurora/桌面/tcp/socket_serve/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aurora/桌面/tcp/socket_serve/cmake-build-debug/CMakeFiles/socket_serve.dir
+/home/aurora/桌面/tcp/socket_serve/cmake-build-debug/CMakeFiles/edit_cache.dir

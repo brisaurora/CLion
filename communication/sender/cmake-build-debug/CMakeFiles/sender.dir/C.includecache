@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aurora/drive/communication/sender/main.c
+stdio.h
+-
+pthread.h
+/home/aurora/drive/communication/sender/pthread.h
+unistd.h
+/home/aurora/drive/communication/sender/unistd.h
+semaphore.h
+/home/aurora/drive/communication/sender/semaphore.h
+sys/types.h
+-
+sys/ipc.h
+-
+sys/msg.h
+-
+string.h
+/home/aurora/drive/communication/sender/string.h
+

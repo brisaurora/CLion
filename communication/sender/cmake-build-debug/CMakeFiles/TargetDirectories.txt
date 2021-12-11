@@ -1,0 +1,3 @@
+/home/aurora/drive/communication/sender/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aurora/drive/communication/sender/cmake-build-debug/CMakeFiles/sender.dir
+/home/aurora/drive/communication/sender/cmake-build-debug/CMakeFiles/edit_cache.dir

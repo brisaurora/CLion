@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aurora/file/main.c
+fcntl.h
+-
+stdio.h
+-
+unistd.h
+-
+string.h
+/home/aurora/file/string.h
+linux/module.h
+-
+linux/kernel.h
+-
+linux/init.h
+-
+linux/moduleparam.h
+-
+linux/sched.h
+-
+linux/pid.h
+-
+linux/cred.h
+-
+
