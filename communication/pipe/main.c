@@ -45,11 +45,13 @@ int main() {
         }
         sem_post(pipe_sem_read);
     }
-
-    sem_wait(pipe_sem_read);
-    int read_num;
-    memset(OutPipe,0,sizeof(OutPipe));
-    read_num=read(mypipe[0],OutPipe,sizeof(OutPipe));
-    printf("output %d\n",read_num);
+    else
+    {
+        sem_wait(pipe_sem_read);
+        int read_num;
+        memset(OutPipe,0,sizeof(OutPipe));
+        read_num=read(mypipe[0],OutPipe,sizeof(OutPipe));
+        printf("output %d\n",read_num);
+    }
     return 0;
 }

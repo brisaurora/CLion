@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/shm.dir/main.c.o  -o shm 
+/usr/bin/cc -g  -pthread CMakeFiles/shm.dir/main.c.o  -o shm 

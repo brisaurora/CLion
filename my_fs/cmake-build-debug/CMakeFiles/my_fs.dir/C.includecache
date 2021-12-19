@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/CLion/my_fs/init.c
+init.h
+E:/CLion/my_fs/init.h
+unistd.h
+-
+
+E:/CLion/my_fs/init.h
+malloc.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+time.h
+-
+
+E:/CLion/my_fs/main.c
+init.h
+E:/CLion/my_fs/init.h
+

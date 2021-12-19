@@ -23,4 +23,6 @@ semaphore.h
 /home/aurora/drive/communication/pipe/semaphore.h
 fcntl.h
 -
+stdlib.h
+/home/aurora/drive/communication/pipe/stdlib.h
 

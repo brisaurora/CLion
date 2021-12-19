@@ -1,3 +1,3 @@
-/home/aurora/drive/communication/pipe_three/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/aurora/drive/communication/pipe_three/cmake-build-debug/CMakeFiles/pipe_three.dir
-/home/aurora/drive/communication/pipe_three/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/aurora/drive/communication/pipe_t/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aurora/drive/communication/pipe_t/cmake-build-debug/CMakeFiles/pipe_three.dir
+/home/aurora/drive/communication/pipe_t/cmake-build-debug/CMakeFiles/edit_cache.dir
