@@ -462,11 +462,8 @@ offset_t *get_address_i_node_block(fs_size_t i_node_block_num,i_node *inode)
         else
         {
             fs_size_t block_num_in_level1_num=i_node_block_num-DIRECT_BLOCK_NUM;
-            cache_num= searche_cache(inode->i_block[SMALL_BLOCK_NUM-1]);//检查是否在cache里
-            if(cache_num>=MAX_FILE_CACHE)
-            {
-                return get_address_i_node_level1_block(inode->i_block[SMALL_BLOCK_NUM-1],block_num_in_level1_num);
-            }
+            return get_address_i_node_level1_block(inode->i_block[SMALL_BLOCK_NUM - 1],
+                                                                    block_num_in_level1_num);
         }
     }
 
@@ -475,16 +472,29 @@ offset_t *get_address_i_node_block(fs_size_t i_node_block_num,i_node *inode)
 offset_t *get_address_i_node_level1_block(offset_t block_level1_address,fs_size_t block_num_in_level1)
 {
     char temp_buff[BLOCKSIZE];
-    get_block_from_file(block_level1_address,temp_buff);
-    save_block_to_cache(temp_buff,block_level1_address);
-    offset_t *temp_block_level;
     int cache_num;
-    cache_num= searche_cache(block_level1_address);
+    cache_num= searche_cache(block_level1_address);//检查是否在cache里
+    if(cache_num>=MAX_FILE_CACHE)
+    {
+        get_block_from_file(block_level1_address,temp_buff);
+        save_block_to_cache(temp_buff,block_level1_address);
+        cache_num= searche_cache(block_level1_address);
+    }
+    offset_t *temp_block_level;
     temp_block_level=(offset_t *)fs_TLB[cache_num].file_cache;
-    if(*(temp_block_level+block_num_in_level1)==0)
+    temp_block_level+=block_num_in_level1;
+    if(*temp_block_level==0)
         return NULL;
-    else
-        return (((offset_t *)fs_TLB[cache_num].file_cache)+block_num_in_level1);
+    else {
+        int level1_block_cache;
+        level1_block_cache= searche_cache(*temp_block_level);
+        if(level1_block_cache>=MAX_FILE_CACHE)
+        {
+            get_block_from_file((*((offset_t *)fs_TLB[cache_num].file_cache)+block_num_in_level1),temp_buff);
+            save_block_to_cache(temp_buff,*(((offset_t *)fs_TLB[cache_num].file_cache)+block_num_in_level1));
+        }
+        return (((offset_t *) fs_TLB[cache_num].file_cache) + block_num_in_level1);
+    }
 
 }
 offset_t *allocation_block_to_inode(fs_size_t i_node_block_num,i_node *inode)
@@ -492,7 +502,7 @@ offset_t *allocation_block_to_inode(fs_size_t i_node_block_num,i_node *inode)
     char temp_block_buff[BLOCKSIZE];
     if(i_node_block_num>=MAX_BLOCK_IN_INODE)
         return NULL;
-    int cache_num;
+
     //直接索引
     if(i_node_block_num<DIRECT_BLOCK_NUM) {
         inode->i_block[i_node_block_num]= get_Block_address(get_free_block());
@@ -505,32 +515,34 @@ offset_t *allocation_block_to_inode(fs_size_t i_node_block_num,i_node *inode)
         if(inode->i_block[SMALL_BLOCK_NUM-1]==0)
             inode->i_block[SMALL_BLOCK_NUM-1]= get_Block_address(get_free_block());
         fs_size_t block_num_in_level1_num=i_node_block_num-DIRECT_BLOCK_NUM;
-        cache_num= searche_cache(inode->i_block[SMALL_BLOCK_NUM-1]);//检查是否在cache里
-        if(cache_num>=MAX_FILE_CACHE)
-        {
-            return allocation_block_level1_to_inode(inode->i_block[SMALL_BLOCK_NUM-1],block_num_in_level1_num);
-        }
+        return (offset_t *) allocation_block_level1_to_inode(inode->i_block[SMALL_BLOCK_NUM - 1],
+                                                             block_num_in_level1_num);
+
     }
     return NULL;
 }
 offset_t *allocation_block_level1_to_inode(offset_t block_level1_address,fs_size_t block_num_in_level1)
 {
     char temp_buff[BLOCKSIZE];
-    get_block_from_file(block_level1_address,temp_buff);
-    save_block_to_cache(temp_buff,block_level1_address);
-    offset_t *temp_block_level1;
     int cache_num;
     cache_num= searche_cache(block_level1_address);
-    temp_block_level1=(offset_t *)fs_TLB[cache_num].file_cache;
-    if(*(temp_block_level1+block_num_in_level1)!=0)
-        return (((offset_t *)fs_TLB[cache_num].file_cache)+block_num_in_level1);
-    else {
-        temp_block_level1+=block_num_in_level1;
-        *temp_block_level1= get_Block_address(get_free_block());
-        get_block_from_file(*temp_block_level1,temp_buff);
-        save_block_to_cache(temp_buff,*temp_block_level1);
-        return (((offset_t *)fs_TLB[cache_num].file_cache)+block_num_in_level1);
+    if(cache_num>=MAX_FILE_CACHE) {
+        get_block_from_file(block_level1_address,temp_buff);
+        save_block_to_cache(temp_buff,block_level1_address);
+        cache_num= searche_cache(block_level1_address);
     }
+    fs_TLB[cache_num].cache_state=1;
+
+    offset_t *temp_block_level1;
+
+
+    temp_block_level1=(offset_t *)fs_TLB[cache_num].file_cache;
+    temp_block_level1+block_num_in_level1;
+    if(*temp_block_level1==0)
+        *temp_block_level1= get_Block_address(get_free_block());
+    get_block_from_file(*temp_block_level1,temp_buff);
+    save_block_to_cache(temp_buff,*temp_block_level1);
+    return (((offset_t *) fs_TLB[cache_num].file_cache) + block_num_in_level1);
 }
 void my_exit()
 {
@@ -703,7 +715,7 @@ void my_read(int fd)
     }
     temp_block_address=get_address_i_node_block(i,temp_inode);
     read_message_in_block(offset_end,*temp_block_address);
-    printf("\n");
+    printf("\nthe len of this data file is %d\n",temp_inode->length);
     free(temp_inode);
 
 }
@@ -768,6 +780,8 @@ void my_write(int fd)
     char *temp_write;
     int flag=1;
     temp_block_address=get_address_i_node_block(block_num,temp_inode);
+    if(temp_block_address==NULL)
+        temp_block_address= allocation_block_to_inode(block_num,temp_inode);
     cache_num= searche_cache(*temp_block_address);
     temp_write=fs_TLB[cache_num].file_cache;
 
@@ -795,18 +809,19 @@ void my_write(int fd)
                 openfilelist[fd].count++;
             fs_TLB[cache_num].cache_state=1;
         }
+        if(!flag)
+            break;
         block_num++;
-        //分配数据块
-        if(flag&&openfilelist->count==temp_inode->length)
-            temp_block_address=allocation_block_to_inode(block_num,temp_inode);
-        if(flag)
-        {
-            //获取数据块
-            temp_block_address=get_address_i_node_block(block_num,temp_inode);
-            cache_num= searche_cache(*temp_block_address);
-            temp_write=fs_TLB[cache_num].file_cache;
-            block_offset=0;
-        }
+        //获取数据块
+        temp_block_address=get_address_i_node_block(block_num,temp_inode);
+        if(*temp_block_address==0)
+            temp_block_address = allocation_block_to_inode(block_num, temp_inode);
+        printf("get block is:%d\n",*temp_block_address);
+
+        cache_num= searche_cache(*temp_block_address);
+        printf("cache num is:%d\n",cache_num);
+        temp_write=fs_TLB[cache_num].file_cache;
+        block_offset=0;
 
     }
     save_inode_to_file(temp_inode_address,temp_inode);
@@ -831,7 +846,7 @@ void my_seek(fs_size_t len,int cmd_Type,fs_size_t max_len,int fd)
             else
                 openfilelist[fd].count=len;break;
         case my_SEEK_END:
-            openfilelist[fd].count=max_len;break;
+            openfilelist[fd].count=max_len-1;break;
         default:break;
     }
 

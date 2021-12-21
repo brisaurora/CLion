@@ -142,6 +142,5 @@ int select_Type_of_file(char *file_exam);//判断文件类型
 void read_message_in_block(fs_size_t offset_end,offset_t block_address);//显示某一个数据块从第i位开始的数据
 void write_message_in_block(fs_size_t offset_begin,offset_t block_address,char *src_buff);
 void my_seek(fs_size_t len,int cmd_Type,fs_size_t max_len,int fd);//重定位
-
 /*********************文件读写函数*******************************/
 #endif //MY_FILE_SYSTEM_FS_OPERATION_H

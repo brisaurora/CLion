@@ -8,8 +8,15 @@ int main() {
     int cmd_num;
     start_fs();
     init_root_dir_inode();
-    FILE *file;
-
+   /* offset_t *temp,inode_address;
+    i_node temp_inode;
+    inode_address= get_Inode_address(4);
+    get_inode_from_file(22,&temp_inode);
+    temp= allocation_block_to_inode(12,&temp_inode);
+    printf("%d,%p\n",*temp,temp);
+    printf("%p\n",fs_TLB);
+    temp= get_address_i_node_block(12,&temp_inode);
+    printf("%d,%p\n",*temp,temp);*/
     printf("****************file system start********************\n");
     while (1)
     {
