@@ -49,23 +49,23 @@ int main() {
                 if(sp!=NULL)
                     my_cd(sp);
                 else
-                    printf("you need to input a name to cd!\n");break;break;
+                    printf("you need to input a name to cd!\n");break;
             case my_create_t:sp= strtok(NULL," ");
                 if(sp!=NULL)
                     my_create(sp);
                 else
-                    printf("you need to input a name to create!\n");break;break;
+                    printf("you need to input a name to create!\n");break;
             case my_open_t:sp= strtok(NULL," ");
                 if(sp!=NULL)
                     my_open(sp);
                 else
-                    printf("you need to input a name to open!\n");break;break;
-
+                    printf("you need to input a name to open!\n");break;
+            case my_help_t:my_help();break;
             default:
                 printf("wrong cmd!\n");
-                printf("%d ",get_free_Inode());
-                printf("%d \n",get_free_block());
-                /*for(int i=0;i<PER_BLOCK_GROUP_INODE_MAX_NUM/16;i++)
+                //printf("%d ",get_free_Inode());
+                //printf("%d \n",get_free_block());
+                for(int i=0;i<PER_BLOCK_GROUP_INODE_MAX_NUM/16;i++)
                 {
 
                     printf("%d ",fs_TLB[2].file_cache[i]);
@@ -73,7 +73,17 @@ int main() {
                         printf("\n");
 
                 }
-                printf("%d",fs_TLB[2].block_address);*/
+                printf("\n******inode map**********\n");
+                for(int i=0;i<PER_BLOCK_GROUP_BLOCK_MAX_NUM/4;i++)
+                {
+
+                    printf("%d ",fs_TLB[1].file_cache[i]);
+                    if(i%32==0&&i!=0)
+                        printf("\n");
+
+                }
+                printf("\n********block map***********\n");
+
                 break;
         }
     }

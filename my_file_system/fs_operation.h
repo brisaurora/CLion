@@ -21,7 +21,8 @@ enum cmdType
     my_write_t,
     my_read_t,
     my_rm_t,
-    my_close_t
+    my_close_t,
+    my_help_t
 
 };
 enum fileType
@@ -29,6 +30,12 @@ enum fileType
     diretory_file,
     data_file,
     undefine_file//未知文件
+};
+enum seek_Type
+{
+    my_SEEK_SET,
+    my_SEEK_CUR,
+    my_SEEK_END
 };
 /*全局变量区域
  *
@@ -55,6 +62,7 @@ void my_write(int fd);
 void my_rm(char *filename);
 void my_rmdir(char *filename);
 void my_close(int fd);
+void my_help(void);
 
 /*********************初始化函数*******************************/
 void init_openfile(void);//从虚拟磁盘载入根目录，超级块等必要块
@@ -91,6 +99,8 @@ int save_dir_entry_to_block(char *filename,offset_t block_address,fs_size_t file
  */
 offset_t *allocation_block_to_inode(fs_size_t i_node_block_num,i_node *inode);//分配数据块
 offset_t *get_address_i_node_block(fs_size_t i_node_block_num,i_node *inode);//获取数据块状态
+offset_t *allocation_block_level1_to_inode(offset_t block_level1_address,fs_size_t block_num_in_level1);//分配数据块
+offset_t *get_address_i_node_level1_block(offset_t block_level1_address,fs_size_t block_num_in_level1);//获取数据块状态
 int select_cmd(char *cmd);//选择命令
 int get_free_block(void);//获取空块
 int get_free_Inode(void);//获取新索引节点
@@ -99,6 +109,8 @@ void come_to_other_GDT(fs_size_t move_to_GDT_num);//切换至其他块组
 offset_t get_Inode_address(fs_size_t inode);//获取索引节点绝对地址
 offset_t get_Block_address(fs_size_t block);//获取索引节点绝对地址
 offset_t searche_cache(offset_t address);//搜索是否存在cache
+
+
 /*********************核心分配函数***************************/
 
 
@@ -113,12 +125,7 @@ void get_inode_from_file(offset_t inode_address,i_node *dst_inode);//从文件�
 /********************文件同步函数*******************************/
 
 
-/*********************文件释放函数*******************************
- *
- *
- *
- */
-offset_t *free_block_i_inode(fs_size_t i_node_block_num,i_node *inode);//释放数据块
+/*********************文件释放函数*******************************/
 void rm_block_in_bitmap(offset_t block_address);//修改索引节点位图
 void rm_inode_in_bitmap(fs_size_t inode_num);//修改块位图
 void rm_search_file_and_delete(char *filename);//查找目录项并执行删除操作
@@ -130,4 +137,11 @@ void rm_data_file_in_block(fs_size_t block_num,i_node *temp_inode);//删除数�
 int check_dir_in_block_is_empty(offset_t block_num,i_node *temp_inode);//确认目录项是否为空
 int select_Type_of_file(char *file_exam);//判断文件类型
 /*********************文件释放函数*******************************/
+
+/*********************文件读写函数*******************************/
+void read_message_in_block(fs_size_t offset_end,offset_t block_address);//显示某一个数据块从第i位开始的数据
+void write_message_in_block(fs_size_t offset_begin,offset_t block_address,char *src_buff);
+void my_seek(fs_size_t len,int cmd_Type,fs_size_t max_len,int fd);//重定位
+
+/*********************文件读写函数*******************************/
 #endif //MY_FILE_SYSTEM_FS_OPERATION_H

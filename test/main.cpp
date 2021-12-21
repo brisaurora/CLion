@@ -9,38 +9,26 @@ typedef struct a
     int a;
 }aa[10];
 int main() {
-    a * temp=(a*) malloc(16);
-    temp->d=10;
-    temp->l=9;
-    temp->c=-1.79e307;
-    temp->a=1;
-    char *test=(char *)temp;
-    char k[26];
-    memset(k,0,27);
-    memcpy(k,temp,40);
-    memcpy(temp,k,40);
-    double *ky=(double* )(k+8);
-    cout<<ky<< endl;
-    cout<< sizeof (a)<<sizeof (aa)<<endl;
-    cout<<sizeof (*temp)<<temp->d<<" "<<temp->l<<" "<<temp->c<<temp->a<<endl;
-    cout<<(short )*test<<" ";
-    test=test+2;
-    cout<<(short )*(test)<<" ";
-    test=test+4;
-    cout<<(int )*(test)<<" ";
-    test=test+2;
-    cout<<(double )*(test)<<" ";
-    test=test+8;
-    cout<<(int )*(test)<<" ";
-    test=test+4;
-    cout<<(double )*(test)<<" ";
-    test=test+4;
-    cout<<(double )*(test)<<" ";
-    test=test+1;
-    cout<<(double )*(test)<<" ";
     FILE *file;
-    file= fopen("TEST_READ","wb+");
-    fseek(file,100000000,SEEK_SET);
-    fwrite("aaa",3,1,file);
+    file= fopen("TEST_READ","rb+");
+    fseek(file,10,SEEK_SET);
+    char temp_buf[1220];
+    char meg[1024];
+
+    int i=0;
+
+    while(i<1024) {
+
+        scanf("%c", meg + i);
+
+        if (meg[i] == '$') break;
+        i++;
+    }
+    fwrite(meg, strlen(meg),1,file);
+    fseek(file,0,SEEK_SET);
+    memset(meg,0,sizeof(meg));
+    fread(meg, 20,1,file);
+    cout<<"%"<<endl;
+    cout<<meg<<endl;
     return 0;
 }

@@ -22,3 +22,11 @@ E:/CLion/my_file_system/string.h
 stdlib.h
 E:/CLion/my_file_system/stdlib.h
 
+E:/CLion/my_file_system/main.c
+stdio.h
+-
+string.h
+E:/CLion/my_file_system/string.h
+fs_operation.h
+E:/CLion/my_file_system/fs_operation.h
+
