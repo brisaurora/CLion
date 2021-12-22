@@ -201,10 +201,11 @@ void start_fs(void)
     }
     else
     {
+        fclose(file);
         printf("can not find virtual fs!try create a fs_file.\n");
         my_format();
     }
-    fclose(file);
+
     init_openfile();
 }
 void save_block_to_cache(void *cache,offset_t cahce_address)
@@ -447,6 +448,8 @@ offset_t *get_address_i_node_block(fs_size_t i_node_block_num,i_node *inode)
     //直接索引
     if(i_node_block_num<DIRECT_BLOCK_NUM)
     {
+        if(inode->i_block[i_node_block_num]==0)
+            inode->i_block[i_node_block_num]= get_Block_address(get_free_block());
         cache_num= searche_cache(inode->i_block[i_node_block_num]);//检查是否在cache里
         if(cache_num>=MAX_FILE_CACHE)
         {
@@ -458,13 +461,10 @@ offset_t *get_address_i_node_block(fs_size_t i_node_block_num,i_node *inode)
     else if(i_node_block_num<DIRECT_BLOCK_NUM+1*BLOCKSIZE/sizeof(offset_t))
     {
         if(inode->i_block[SMALL_BLOCK_NUM-1]==0)
-            return NULL;
-        else
-        {
-            fs_size_t block_num_in_level1_num=i_node_block_num-DIRECT_BLOCK_NUM;
-            return get_address_i_node_level1_block(inode->i_block[SMALL_BLOCK_NUM - 1],
-                                                                    block_num_in_level1_num);
-        }
+            inode->i_block[SMALL_BLOCK_NUM-1]= get_Block_address(get_free_block());
+        fs_size_t block_num_in_level1_num=i_node_block_num-DIRECT_BLOCK_NUM;
+        return get_address_i_node_level1_block(inode->i_block[SMALL_BLOCK_NUM - 1],block_num_in_level1_num);
+
     }
 
     return  NULL;
@@ -490,10 +490,12 @@ offset_t *get_address_i_node_level1_block(offset_t block_level1_address,fs_size_
         level1_block_cache= searche_cache(*temp_block_level);
         if(level1_block_cache>=MAX_FILE_CACHE)
         {
-            get_block_from_file((*((offset_t *)fs_TLB[cache_num].file_cache)+block_num_in_level1),temp_buff);
-            save_block_to_cache(temp_buff,*(((offset_t *)fs_TLB[cache_num].file_cache)+block_num_in_level1));
+            get_block_from_file(*temp_block_level,temp_buff);
+            save_block_to_cache(temp_buff,*temp_block_level);
         }
-        return (((offset_t *) fs_TLB[cache_num].file_cache) + block_num_in_level1);
+        //printf("block address in:%d %d\n",*temp_block_level,
+               //*((offset_t *)fs_TLB[cache_num].file_cache + block_num_in_level1));
+        return ((offset_t *)fs_TLB[cache_num].file_cache + block_num_in_level1);
     }
 
 }
@@ -505,7 +507,8 @@ offset_t *allocation_block_to_inode(fs_size_t i_node_block_num,i_node *inode)
 
     //直接索引
     if(i_node_block_num<DIRECT_BLOCK_NUM) {
-        inode->i_block[i_node_block_num]= get_Block_address(get_free_block());
+        if(inode->i_block[i_node_block_num]==0)
+            inode->i_block[i_node_block_num]= get_Block_address(get_free_block());
         get_block_from_file(inode->i_block[i_node_block_num],temp_block_buff);
         save_block_to_cache(temp_block_buff,inode->i_block[i_node_block_num]);
         return (&(inode->i_block[i_node_block_num]));
@@ -515,7 +518,7 @@ offset_t *allocation_block_to_inode(fs_size_t i_node_block_num,i_node *inode)
         if(inode->i_block[SMALL_BLOCK_NUM-1]==0)
             inode->i_block[SMALL_BLOCK_NUM-1]= get_Block_address(get_free_block());
         fs_size_t block_num_in_level1_num=i_node_block_num-DIRECT_BLOCK_NUM;
-        return (offset_t *) allocation_block_level1_to_inode(inode->i_block[SMALL_BLOCK_NUM - 1],
+        return allocation_block_level1_to_inode(inode->i_block[SMALL_BLOCK_NUM - 1],
                                                              block_num_in_level1_num);
 
     }
@@ -525,6 +528,7 @@ offset_t *allocation_block_level1_to_inode(offset_t block_level1_address,fs_size
 {
     char temp_buff[BLOCKSIZE];
     int cache_num;
+    //检查一级索引地址块是否载入cache
     cache_num= searche_cache(block_level1_address);
     if(cache_num>=MAX_FILE_CACHE) {
         get_block_from_file(block_level1_address,temp_buff);
@@ -533,16 +537,23 @@ offset_t *allocation_block_level1_to_inode(offset_t block_level1_address,fs_size
     }
     fs_TLB[cache_num].cache_state=1;
 
+    //获取1级索引控制块在cache中位置
     offset_t *temp_block_level1;
-
-
     temp_block_level1=(offset_t *)fs_TLB[cache_num].file_cache;
-    temp_block_level1+block_num_in_level1;
+    temp_block_level1+=block_num_in_level1;
+    //检查是否为空
     if(*temp_block_level1==0)
         *temp_block_level1= get_Block_address(get_free_block());
-    get_block_from_file(*temp_block_level1,temp_buff);
-    save_block_to_cache(temp_buff,*temp_block_level1);
-    return (((offset_t *) fs_TLB[cache_num].file_cache) + block_num_in_level1);
+    int cache_num_level1;
+    //检查一级索引地址块是否载入cache
+    cache_num_level1= searche_cache(*temp_block_level1);
+    if(cache_num_level1>=MAX_FILE_CACHE) {
+        get_block_from_file(*temp_block_level1, temp_buff);
+        save_block_to_cache(temp_buff, *temp_block_level1);
+        //printf("save %d to cache\n",*temp_block_level1);
+    }
+
+    return ((offset_t *) fs_TLB[cache_num].file_cache + block_num_in_level1);
 }
 void my_exit()
 {
@@ -784,7 +795,8 @@ void my_write(int fd)
         temp_block_address= allocation_block_to_inode(block_num,temp_inode);
     cache_num= searche_cache(*temp_block_address);
     temp_write=fs_TLB[cache_num].file_cache;
-
+   // printf("get block address is:%d\n",*temp_block_address);
+  //  printf("cache num is:%d\n",cache_num);
     //输入数据
     while (flag)
     {
@@ -809,17 +821,23 @@ void my_write(int fd)
                 openfilelist[fd].count++;
             fs_TLB[cache_num].cache_state=1;
         }
-        if(!flag)
-            break;
+
         block_num++;
         //获取数据块
         temp_block_address=get_address_i_node_block(block_num,temp_inode);
-        if(*temp_block_address==0)
+        if(temp_block_address==NULL)
             temp_block_address = allocation_block_to_inode(block_num, temp_inode);
-        printf("get block is:%d\n",*temp_block_address);
-
+        if(!flag)
+            break;
+        //printf("get block address is:%d\n",*temp_block_address);
+        if(*temp_block_address==0)
+        {
+            printf("allocate error!\n");
+            break;
+        }
         cache_num= searche_cache(*temp_block_address);
-        printf("cache num is:%d\n",cache_num);
+       // printf("cache num is:%d\n",cache_num);
+      //  printf("%lu",BLOCKSIZE/sizeof (offset_t));
         temp_write=fs_TLB[cache_num].file_cache;
         block_offset=0;
 

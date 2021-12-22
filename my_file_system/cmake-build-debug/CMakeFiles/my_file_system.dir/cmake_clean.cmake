@@ -1,10 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/my_file_system.dir/fs_operation.c.obj"
-  "CMakeFiles/my_file_system.dir/main.c.obj"
-  "libmy_file_system.dll.a"
-  "my_file_system.exe"
-  "my_file_system.exe.manifest"
+  "CMakeFiles/my_file_system.dir/main.c.o"
+  "CMakeFiles/my_file_system.dir/fs_operation.c.o"
   "my_file_system.pdb"
+  "my_file_system"
 )
 
 # Per-language clean rules from dependency scanning.
