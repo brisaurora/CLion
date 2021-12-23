@@ -34,9 +34,8 @@ typedef unsigned short uint16_t;
 #define EXAMNAME_SIZE 4//扩展名字
 #define MAX_FILE_NAME 8//最大文件名长度
 #define CHECK_NUM_SIZE 9//校验码长度
-#define MAX_DIR_BLOCK_FCB_NUM (BLOCKSIZE/FCB_SIZE)
+#define MAX_DIR_BLOCK_FCB_NUM (BLOCKSIZE/FCB_SIZE)//一个块存储多少个目录项
 //目录文件
-#define PER_BLOCK_MAX_DIR_DENTRY_NUM (BLOCKSIZE/FCB_SIZE)//一个块存储多少个目录项
 #define DIR_MAX_LEN 80
 //必要文件数据
 #define FILENAME "zdz_fs"

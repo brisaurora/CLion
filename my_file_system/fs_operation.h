@@ -68,8 +68,8 @@ void my_help(void);
 void init_openfile(void);//从虚拟磁盘载入根目录，超级块等必要块
 void init_root_dir_inode(void);//初始化根目录索引节点，并存入fs_TLB
 void init_inode(fs_size_t i_node_num,int node_type);//初始化i节点
-void get_time(uint16_t *date_time,uint16_t *time);
-void output_time(uint16_t data_time,uint16_t time);
+void get_time(uint16_t *date_time,uint16_t *time);//获取时间
+void output_time(uint16_t data_time,uint16_t time);//输出时间
 /********************初始化函数*******************************/
 
 
@@ -140,7 +140,6 @@ int select_Type_of_file(char *file_exam);//判断文件类型
 
 /*********************文件读写函数*******************************/
 void read_message_in_block(fs_size_t offset_end,offset_t block_address);//显示某一个数据块从第i位开始的数据
-void write_message_in_block(fs_size_t offset_begin,offset_t block_address,char *src_buff);
 void my_seek(fs_size_t len,int cmd_Type,fs_size_t max_len,int fd);//重定位
 /*********************文件读写函数*******************************/
 #endif //MY_FILE_SYSTEM_FS_OPERATION_H

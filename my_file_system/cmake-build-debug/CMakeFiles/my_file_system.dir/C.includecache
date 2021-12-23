@@ -6,27 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/aurora/drive/fs_config.h
+E:/CLion/my_file_system/fs_config.h
 
-/home/aurora/drive/fs_operation.c
+E:/CLion/my_file_system/fs_operation.c
 fs_operation.h
-/home/aurora/drive/fs_operation.h
+E:/CLion/my_file_system/fs_operation.h
 
-/home/aurora/drive/fs_operation.h
+E:/CLion/my_file_system/fs_operation.h
 fs_config.h
-/home/aurora/drive/fs_config.h
+E:/CLion/my_file_system/fs_config.h
 stdio.h
-/home/aurora/drive/stdio.h
+E:/CLion/my_file_system/stdio.h
 string.h
-/home/aurora/drive/string.h
+E:/CLion/my_file_system/string.h
 stdlib.h
-/home/aurora/drive/stdlib.h
-
-/home/aurora/drive/main.c
-stdio.h
--
-string.h
-/home/aurora/drive/string.h
-fs_operation.h
-/home/aurora/drive/fs_operation.h
+E:/CLion/my_file_system/stdlib.h
 

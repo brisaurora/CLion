@@ -1,16 +1,24 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
   "C"
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/aurora/drive/fs_operation.c" "/home/aurora/drive/cmake-build-debug/CMakeFiles/my_file_system.dir/fs_operation.c.o"
-  "/home/aurora/drive/main.c" "/home/aurora/drive/cmake-build-debug/CMakeFiles/my_file_system.dir/main.c.o"
+  "E:/CLion/my_file_system/fs_operation.c" "E:/CLion/my_file_system/cmake-build-debug/CMakeFiles/my_file_system.dir/fs_operation.c.obj"
+  "E:/CLion/my_file_system/main.c" "E:/CLion/my_file_system/cmake-build-debug/CMakeFiles/my_file_system.dir/main.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
   )
 
 # Targets to which this target links.
