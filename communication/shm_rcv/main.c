@@ -28,7 +28,7 @@ int main() {
     int shm_id;
     shm_id= shmget(SHM_KEY,0,IPC_CREAT|0666);
     rcv_shm_memory=(struct shm_control*) shmat(shm_id,0,0);
-    printf("Memory is at %X\n",(int)rcv_shm_memory);
+    printf("Memory is at %p\n",rcv_shm_memory);
 
     sem_wait(shm_read_rcv);
     sem_wait(shm_write);

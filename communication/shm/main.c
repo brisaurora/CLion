@@ -32,7 +32,7 @@ int main() {
     shmid= shmget(SHM_KEY,SHM_SIZE,IPC_CREAT|0666);
     share_memory=(struct shm_control*) shmat(shmid,0,0);
 
-    printf("Memory is at %X\n",(int)share_memory);
+    printf("Memory is at %p\n",share_memory);
     scanf("%s",sender.shm_buff);
     sender.shmType=send_to_rcv;
     sem_wait(shm_write);

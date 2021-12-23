@@ -6,6 +6,7 @@ int main() {
 
     char cmd_buff[300],*sp;
     int cmd_num;
+    int i;
     start_fs();
     init_root_dir_inode();
    /* offset_t *temp,inode_address;
@@ -22,7 +23,21 @@ int main() {
     {
         //printf("%d\n",openfilelist[currfd].inode_num);
         printf("%s>",openfilelist[currfd].dir);
-        gets(cmd_buff);
+        i=0;
+        while (i<300)
+        {
+
+            scanf("%c",cmd_buff+i);
+            if(cmd_buff[i]=='\n')
+            {
+                cmd_buff[i]='\0';
+                break;
+
+            }
+            i++;
+        }
+
+
         if(!strcmp(cmd_buff,""))
         {
             printf("\n");
@@ -72,7 +87,7 @@ int main() {
                 printf("wrong cmd!\n");
                 //printf("%d ",get_free_Inode());
                 //printf("%d \n",get_free_block());
-                for(int i=0;i<PER_BLOCK_GROUP_INODE_MAX_NUM/16;i++)
+                /*for(i=0;i<PER_BLOCK_GROUP_INODE_MAX_NUM/16;i++)
                 {
 
                     printf("%d ",fs_TLB[2].file_cache[i]);
@@ -81,7 +96,7 @@ int main() {
 
                 }
                 printf("\n******inode map**********\n");
-                for(int i=0;i<PER_BLOCK_GROUP_BLOCK_MAX_NUM/4;i++)
+                for(i=0;i<PER_BLOCK_GROUP_BLOCK_MAX_NUM/4;i++)
                 {
 
                     printf("%d ",fs_TLB[1].file_cache[i]);
@@ -90,7 +105,7 @@ int main() {
 
                 }
                 printf("\n********block map***********\n");
-                break;
+                break;*/
         }
     }
 }

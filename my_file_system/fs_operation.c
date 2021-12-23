@@ -4,11 +4,15 @@
 #include "fs_operation.h"
 void my_format(void)
 {
-    old_cache_address=ROOT_DIR_END;
+    old_cache_address=ROOT_DIR_END;//初始化用户cache编号为起始位置
+    //申请一个块组的空间用来初始化（只有1MB，极大优化文件系统初始化占用的内存
+    //不用增加设置提高程序运行占用的堆栈空间真不错
     char *my_virtual_hard=(char *) malloc(BLOCK_GROUP_SIZE);
+    //初始化全局变量
     memset(fs_TLB,0,sizeof(fs_TLB));
     memset(openfilelist,0,sizeof (openfilelist));
     memset(my_virtual_hard,0,BLOCK_GROUP_SIZE);
+    //打开文件并释放之前占用的空间
     FILE *file;
     file= fopen(FILENAME,"wb+");
     //初始化引导块
@@ -16,11 +20,13 @@ void my_format(void)
     strcpy(temp_block0->check_string,CHECK_BLOCK0);
     strcpy(temp_block0->information,FILE_TYPE_MSG);
     temp_block0->super_block0_address= BLOCKSIZE;
-    //初始化根目录
+    //初始化根目录文件控制块
     temp_block0->root.i_node_num=ROOT_INODE_NUM;
     strcpy(temp_block0->root.filename,"root");
     strcpy(temp_block0->root.examname,DIRECTORY_FILE_EXNAME);
     fwrite(temp_block0,BLOCKSIZE,1,file);
+
+    //开始初始化块组
     memset(my_virtual_hard,0,BLOCK_GROUP_SIZE);
     //初始化超级块
     super_block *temp_super_block0=(super_block*)(my_virtual_hard);
@@ -36,7 +42,7 @@ void my_format(void)
     }
     temp_super_block0->root_inode=ROOT_INODE_NUM;
     temp_super_block0->super_block0_start_address=BLOCKSIZE;
-    //初始化块组0块组描述符
+    //初始化块组0的0号块组描述符
     group_Description_Table_Block *temp_group_description0=(GDT *)(my_virtual_hard+BLOCKSIZE*3);
     temp_group_description0->block_group_num=0;
     temp_group_description0->super_block0_address=0;
@@ -47,6 +53,7 @@ void my_format(void)
     temp_group_description0->data_start_block_address=temp_group_description0->Inode_Save_address+BLOCKSIZE*BG_INODE_TABLE_BLOCK_NUM;
     temp_group_description0->block_group_free_block=PER_BLOCK_GROUP_BLOCK_MAX_NUM-PER_BLOCK_GROUP_INIT_BLOCK;
     temp_group_description0->block_group_free_inode=PER_BLOCK_GROUP_INODE_MAX_NUM-3;
+    //初始化块组0的其他块组描述符
     for(int i=1;i<BLOCK_GROUP_NUM;i++)
     {
          char *dst_gdt;
@@ -60,22 +67,23 @@ void my_format(void)
         dst_gdt_block->block_group_free_inode=PER_BLOCK_GROUP_INODE_MAX_NUM;
     }
 
-    //初始化块位图0
+    //初始化块位图0，分配系统必要占据的块
     char *dst_gdt;
     for(int i=0;i<(1+BLOCK_GROUP_NUM+2+BG_INODE_TABLE_BLOCK_NUM);i++)//超级块+GDT+块位图+节点位图+节点保存块
     {
         dst_gdt=my_virtual_hard + temp_group_description0->Block_Bitmap_address + i;
         memset(dst_gdt, BLOCK_BUSY, sizeof(unsigned char));
     }
-    //分配root目录索引节点
+    //保留0~1号索引节点
     for(int i=0;i<ROOT_INODE_NUM;i++) {
         dst_gdt=my_virtual_hard + temp_group_description0->Inode_Bitmap_address + i;
         memset(dst_gdt, INODE_NOT_USE,sizeof(unsigned char));
     }
 
+    //设置根目录索引节点
     memset(my_virtual_hard+temp_group_description0->Inode_Bitmap_address+ROOT_INODE_NUM,INODE_BUSY,sizeof (unsigned char));
     fwrite(my_virtual_hard,BLOCK_GROUP_SIZE,1,file);
-    //清除块位图
+    //清除块位图和索引节点位图
     memset(my_virtual_hard+temp_group_description0->Inode_Bitmap_address,INODE_FREE,BLOCKSIZE);
     memset(my_virtual_hard+temp_group_description0->Block_Bitmap_address,BLOCK_FREE,BLOCKSIZE);
     //拷贝整个块组
@@ -88,7 +96,9 @@ void my_format(void)
 }
 offset_t get_Block_address(fs_size_t block)
 {
+    //获取超级块
     super_block *temp_super_block=(super_block *)fs_TLB[0].file_cache;
+    //计算此块所在块组以及在块组内的位置
     offset_t tp;
     offset_t block_GDT,block_num_in_bitmap;
     block_GDT=block/PER_BLOCK_GROUP_BLOCK_MAX_NUM;
@@ -98,13 +108,16 @@ offset_t get_Block_address(fs_size_t block)
         printf("overflow block you can get!\n");
         return -1;
     }
+    //计算绝对地址
     tp=temp_super_block->super_block0_start_address+BLOCK_GROUP_SIZE*block_GDT;
     tp+=block_num_in_bitmap*BLOCKSIZE;
     return tp;
 }
 offset_t get_Inode_address(fs_size_t inode)
 {
+    //获取超级块
     super_block *temp_super_block=(super_block *)fs_TLB[0].file_cache;
+    //获取索引节点块组及其在块组中位置
     offset_t tp;
     offset_t inode_GDT,inode_num_in_bitmap;
     inode_GDT=inode/PER_BLOCK_GROUP_INODE_MAX_NUM;
@@ -114,6 +127,7 @@ offset_t get_Inode_address(fs_size_t inode)
         printf("overflow inode you can get!\n");
         return -1;
     }
+    //计算绝对地址
     tp=temp_super_block->super_block0_start_address+BLOCK_GROUP_SIZE*inode_GDT;//定位块组
     GDT *temp_gdt=(GDT *)fs_TLB[3].file_cache;
     tp=tp+temp_gdt->Inode_Save_address+INODE_SIZE*inode_num_in_bitmap;
@@ -775,7 +789,8 @@ void my_write(int fd)
             scanf("%d",&offset_len);getchar();
             my_seek(offset_len,my_SEEK_SET,temp_inode->length,fd);break;
         case 3:
-            my_seek(0,my_SEEK_END,temp_inode->length,fd);break;
+            my_seek(0,my_SEEK_END,temp_inode->length,fd);
+            break;
         default:break;
 
     }
@@ -864,7 +879,7 @@ void my_seek(fs_size_t len,int cmd_Type,fs_size_t max_len,int fd)
             else
                 openfilelist[fd].count=len;break;
         case my_SEEK_END:
-            openfilelist[fd].count=max_len-1;break;
+            openfilelist[fd].count=max_len==0?0:max_len-1;break;
         default:break;
     }
 
@@ -917,8 +932,9 @@ void rm_search_file_and_delete(char *filename)
         //printf("%d %d\n",*temp_block_address,temp_inode->i_block[i]);
         temp_dir_block=(dir_block *)fs_TLB[cache_num].file_cache;
         err=check_filename_in_block_is_right(temp_dir_block,filename);//返回ERR_FAIL表示找到重名
-        if(err==ERR_FAIL)
-            break;
+        if(err==ERR_FAIL) {
+            fs_TLB[cache_num].cache_state=1;
+            break; }
     }
     if(err==ERR_OK)
     {
@@ -1070,6 +1086,7 @@ void rm_data_file(fs_size_t inode_num)//删除数据文件索引节点
     {
         rm_data_file_in_block(i,temp_inode);
     }
+
     free(temp_inode);
 }
 void rm_dir_file(fs_size_t inode_num)//删除目录文件索引节点
@@ -1091,6 +1108,8 @@ void rm_dir_file(fs_size_t inode_num)//删除目录文件索引节点
     {
         rm_dir_in_block(i,temp_inode);
     }
+
+
     free(temp_inode);
 }
 void rm_dir_in_block(fs_size_t block_num,i_node *temp_inode)//删除目录文件某个数据块内的所有目录项
@@ -1439,6 +1458,9 @@ int get_free_Inode(void)
 
 void come_to_other_GDT(fs_size_t move_to_GDT_num)
 {
+    //高情商：此处代码有极大的压行空间，易于理解
+    //低情商：神智不清的懒狗写法
+
 
     //保存当前快位图和块组描述符至文件
     save_cache_to_file(1);

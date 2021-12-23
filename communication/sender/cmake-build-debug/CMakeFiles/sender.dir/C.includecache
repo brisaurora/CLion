@@ -16,9 +16,11 @@ unistd.h
 semaphore.h
 /home/aurora/drive/communication/sender/semaphore.h
 sys/types.h
--
+/home/aurora/drive/communication/sender/sys/types.h
 sys/ipc.h
 -
+fcntl.h
+/home/aurora/drive/communication/sender/fcntl.h
 sys/msg.h
 -
 string.h
