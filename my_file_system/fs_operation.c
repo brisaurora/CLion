@@ -24,6 +24,7 @@ void my_format(void)
     temp_block0->root.i_node_num=ROOT_INODE_NUM;
     strcpy(temp_block0->root.filename,"root");
     strcpy(temp_block0->root.examname,DIRECTORY_FILE_EXNAME);
+
     fwrite(temp_block0,BLOCKSIZE,1,file);
 
     //开始初始化块组
@@ -230,7 +231,6 @@ void start_fs(void)
     }
     else//未找到文件系统存储文件，创建文件
     {
-        fclose(file);
         printf("can not find virtual fs!try create a fs_file.\n");
         my_format();
     }
@@ -498,7 +498,7 @@ offset_t *get_address_i_node_block(fs_size_t i_node_block_num,i_node *inode)
     {
         //检查是否已分配数据块
         if(inode->i_block[i_node_block_num]==0)
-            inode->i_block[i_node_block_num]= get_Block_address(get_free_block());
+            return NULL;
         cache_num= searche_cache(inode->i_block[i_node_block_num]);//检查是否在cache里
         //载入cache
         if(cache_num>=MAX_FILE_CACHE)
@@ -513,7 +513,7 @@ offset_t *get_address_i_node_block(fs_size_t i_node_block_num,i_node *inode)
     {
         //检查是否为空
         if(inode->i_block[SMALL_BLOCK_NUM-1]==0)
-            inode->i_block[SMALL_BLOCK_NUM-1]= get_Block_address(get_free_block());
+            return NULL;
         //计算1级索引内的块号
         fs_size_t block_num_in_level1_num=i_node_block_num-DIRECT_BLOCK_NUM;
         return get_address_i_node_level1_block(inode->i_block[SMALL_BLOCK_NUM - 1],block_num_in_level1_num);
@@ -656,7 +656,7 @@ void my_cd(char *filename)
         return;
     }
     //搜索目录项并打开
-    search_and_copy_entry_to_openfilelist(filename,0);
+    search_and_copy_entry_to_openfilelist(filename,diretory_file);
 }
 void copy_entry_to_openfile_list(fs_size_t fd,fcb dir_entry)
 {
@@ -675,9 +675,9 @@ void copy_entry_to_openfile_list(fs_size_t fd,fcb dir_entry)
 }
 void my_open(char *filename)
 {
-    if(strcmp(openfilelist[currfd].examname,DIRECTORY_FILE_EXNAME)!=0)
+    if(0!=strcmp(openfilelist[currfd].examname,DIRECTORY_FILE_EXNAME))
     {
-        printf("you can not use my_cd in a data file!\n");
+        printf("you can not use my_open in a dat file!\n");
         return;
     }
     if(strlen(filename)>=MAX_FILE_NAME)
@@ -690,7 +690,7 @@ void my_open(char *filename)
         printf(" please close some file!\n");
         return;
     }
-    search_and_copy_entry_to_openfilelist(filename,1);
+    search_and_copy_entry_to_openfilelist(filename,data_file);
 
 }
 void search_and_copy_entry_to_openfilelist(char *filename,int fileType)
@@ -739,8 +739,8 @@ void search_and_copy_entry_to_openfilelist(char *filename,int fileType)
                 char check_Type_buff[EXAMNAME_SIZE];
                 //选择文件类型
                 switch (fileType) {
-                    case 0:strcpy(check_Type_buff,DIRECTORY_FILE_EXNAME);break;
-                    case 1:strcpy(check_Type_buff,DATA_FILE_EXNAME);break;
+                    case diretory_file:strcpy(check_Type_buff,DIRECTORY_FILE_EXNAME);break;
+                    case data_file:strcpy(check_Type_buff,DATA_FILE_EXNAME);break;
                     default:break;
                 }
                 //检查文件类型
@@ -938,8 +938,10 @@ void my_seek(fs_size_t len,int cmd_Type,fs_size_t max_len,int fd)
         case my_SEEK_SET:
             if(len>=max_len)
                 openfilelist[fd].count=max_len;
+            else if(len>0)
+                openfilelist[fd].count=len;
             else
-                openfilelist[fd].count=len;break;
+                openfilelist[fd].count=0;break;
         case my_SEEK_END:
             openfilelist[fd].count=max_len==0?0:max_len-1;break;
         default:break;
@@ -1023,14 +1025,19 @@ void rm_search_file_and_delete(char *filename)
                 break;
             }
         }
+
         //如果当前目录项数据块为空，释放数据块(除非是root
         if(check_dir_in_block_is_empty(i,temp_inode)==ERR_OK&&currfd!=0)
         {
+
             temp_block_address= get_address_i_node_block(i,temp_inode);
-            rm_block_in_bitmap(*temp_block_address);
-            *temp_block_address=0;
-            temp_inode->length--;
-            save_inode_to_file(temp_inode_address,temp_inode);
+            if(!temp_block_address)
+            {
+                rm_block_in_bitmap(*temp_block_address);
+                *temp_block_address=0;
+                temp_inode->length--;
+                save_inode_to_file(temp_inode_address,temp_inode);
+            }
         }
     }
 
@@ -1074,7 +1081,7 @@ void rm_block_in_bitmap(offset_t block_address)//修改索引节点位图
     //更新块组描述符状态
     temp_gdt->block_group_free_block++;
     fs_TLB[3].cache_state=1;
-    //printf("delete block %d",block_num);
+   // printf("delete block %d",block_num);
 }
 void rm_inode_in_bitmap(fs_size_t inode_num)//修改块位图
 {
@@ -1109,6 +1116,8 @@ int check_dir_in_block_is_empty(offset_t block_num,i_node *temp_inode)
 {
     offset_t *temp_block_address;
     temp_block_address= get_address_i_node_block(block_num,temp_inode);
+    if(!temp_block_address)
+        return ERR_OK;
     int  cache_num;
     cache_num= searche_cache(*temp_block_address);
     dir_block *temp_dir_block=(dir_block *)fs_TLB[cache_num].file_cache;
@@ -1136,6 +1145,7 @@ void rm_inode(fs_size_t inode_num,fs_size_t fileType)
         rm_data_file(inode_num);
     }
 
+
 }
 void rm_data_file(fs_size_t inode_num)//删除数据文件索引节点
 {
@@ -1152,7 +1162,8 @@ void rm_data_file(fs_size_t inode_num)//删除数据文件索引节点
     {
         rm_data_file_in_block(i,temp_inode);
     }
-
+    memset(temp_inode,0,INODE_SIZE);
+    save_inode_to_file(temp_inode_address,temp_inode);
     free(temp_inode);
 }
 void rm_dir_file(fs_size_t inode_num)//删除目录文件索引节点
@@ -1197,7 +1208,10 @@ void rm_dir_in_block(fs_size_t block_num,i_node *temp_inode)//删除目录文件
             fileType = select_Type_of_file(temp_dir_block->dir_entry[i].examname);
             switch (fileType) {
                 case diretory_file:
-                    rm_dir_file(temp_dir_block->dir_entry[i].i_node_num);//递归删除
+                    if(!strcmp(temp_dir_block->dir_entry[i].filename,"..")||!strcmp(temp_dir_block->dir_entry[i].filename,"."))
+                        break;
+                    else
+                        rm_dir_file(temp_dir_block->dir_entry[i].i_node_num);//递归删除
                     break;
                 case data_file:
                     rm_data_file(temp_dir_block->dir_entry[i].i_node_num);//直接删除
@@ -1214,6 +1228,7 @@ void rm_dir_in_block(fs_size_t block_num,i_node *temp_inode)//删除目录文件
     fs_TLB[cache_num].cache_state=1;
     memset(fs_TLB[cache_num].file_cache,0,BLOCKSIZE);
     *temp_block_address=0;
+
 }
 void rm_data_file_in_block(fs_size_t block_num,i_node *temp_inode)//删除数据文件数据块
 {
@@ -1226,7 +1241,6 @@ void rm_data_file_in_block(fs_size_t block_num,i_node *temp_inode)//删除数据
     fs_TLB[cache_num].cache_state=1;
     memset(fs_TLB[cache_num].file_cache,0,BLOCKSIZE);
     *temp_block_address=0;
-
 }
 void my_close(int fd)
 {
@@ -1278,13 +1292,23 @@ void my_help(void)
 {
 
 }
-void get_time(uint16_t *date_time,uint16_t *time)
+void get_time(uint16_t *date_time,uint16_t *day_time)
 {
-
+    time_t rawTime = time(NULL);
+    struct tm* time = localtime(&rawTime);
+    // 5 6 5 bits
+    *day_time = time->tm_hour * 2048 + time->tm_min * 32 + time->tm_sec / 2;
+    // 7 4 5 bits; year from 2000
+    *date_time = (time->tm_year - 100) * 512 + (time->tm_mon + 1) * 32 + (time->tm_mday);
 }
 void output_time(uint16_t data_time,uint16_t time)
 {
-
+    printf("%d/%d/%d %d:%d\n",
+           (data_time>> 9) + 2000,
+           (data_time>> 5) & 0x000f,
+           (data_time) & 0x001f,
+           (time >> 11),
+           (time >> 5) & 0x003f);
 }
 
 
@@ -1307,11 +1331,11 @@ void init_inode(fs_size_t i_node_num,int node_type)
         temp_dir->dir_entry[0].free=1;
         strcpy(temp_dir->dir_entry[0].examname,DIRECTORY_FILE_EXNAME);
         strcpy(temp_dir->dir_entry[0].filename,".");
-        temp_dir->dir_entry[0].i_node_num=0;
+        temp_dir->dir_entry[0].i_node_num=i_node_num;
         temp_dir->dir_entry[1].free=1;
         strcpy(temp_dir->dir_entry[1].examname,DIRECTORY_FILE_EXNAME);
         strcpy(temp_dir->dir_entry[1].filename,"..");
-        temp_dir->dir_entry[1].i_node_num=0;
+        temp_dir->dir_entry[1].i_node_num=openfilelist[currfd].inode_num;
         //标记修改
         fs_TLB[cache_num].cache_state=1;
     }
@@ -1338,11 +1362,15 @@ offset_t searche_cache(offset_t address)
 void show_dir_entry(dir_block *temp_dir)
 {
     int i;
+    i_node *temp_inode=(i_node*) malloc(INODE_SIZE);
+    offset_t temp_inode_addrres;
     for(i=0;i<MAX_DIR_BLOCK_FCB_NUM;i++) {
         if(temp_dir->dir_entry[i].free)
         {
+            temp_inode_addrres= get_Inode_address(temp_dir->dir_entry[i].i_node_num);
+            get_inode_from_file(temp_inode_addrres,temp_inode);
             printf("<%s>%-8s", temp_dir->dir_entry[i].examname, temp_dir->dir_entry[i].filename);
-            printf("\n");
+            output_time(temp_inode->create_data,temp_inode->create_time);
         }
     }
 
@@ -1367,6 +1395,8 @@ void init_root_dir_inode(void)
         for (int i = 0; i < ROOT_DIR_BLOCK; i++)
             temp_inode->i_block[i] = get_Block_address(get_free_block());
         temp_inode->length = ROOT_DIR_BLOCK ;
+        get_time(&(temp_inode->create_data),&(temp_inode->create_time));
+        get_time(&(temp_inode->modified_data),&(temp_inode->modified_time));
         //保存root目录消息
         save_inode_to_file(i_node_address,temp_inode);
     }
@@ -1389,12 +1419,13 @@ void init_root_dir_inode(void)
     temp_dir->dir_entry[0].free=1;
     strcpy(temp_dir->dir_entry[0].examname,DIRECTORY_FILE_EXNAME);
     strcpy(temp_dir->dir_entry[0].filename,".");
-    temp_dir->dir_entry[0].i_node_num=0;
+    temp_dir->dir_entry[0].i_node_num=openfilelist[0].inode_num;
     temp_dir->dir_entry[1].free=1;
     strcpy(temp_dir->dir_entry[1].examname,DIRECTORY_FILE_EXNAME);
     strcpy(temp_dir->dir_entry[1].filename,"..");
-    temp_dir->dir_entry[1].i_node_num=0;
+    temp_dir->dir_entry[1].i_node_num=openfilelist[0].inode_num;
     fs_TLB[cache_num].cache_state=1;
+
     save_inode_to_file(i_node_address,temp_inode);
     free(temp_inode);
 

@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/shm.dir/main.c.o"
+  "CMakeFiles/shm.dir/main.c.obj"
+  "libshm.dll.a"
+  "shm.exe"
+  "shm.exe.manifest"
   "shm.pdb"
-  "shm"
 )
 
 # Per-language clean rules from dependency scanning.

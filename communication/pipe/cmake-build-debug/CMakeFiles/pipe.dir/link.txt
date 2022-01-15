@@ -1,1 +1,3 @@
-/usr/bin/cc -g  -pthread CMakeFiles/pipe.dir/main.c.o  -o pipe 
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\pipe.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\pipe.dir/objects.a @CMakeFiles\pipe.dir\objects1.rsp
+D:\MinGw\mingw64\bin\gcc.exe -g -pthread -Wl,--whole-archive CMakeFiles\pipe.dir/objects.a -Wl,--no-whole-archive -o pipe.exe -Wl,--out-implib,libpipe.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\pipe.dir\linklibs.rsp

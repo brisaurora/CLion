@@ -8,6 +8,7 @@
 #include "stdio.h"
 #include "string.h"
 #include "stdlib.h"
+#include <time.h>
 enum cmdType
 {
     my_ls_t,
@@ -50,17 +51,26 @@ int old_cache_address;//简易cache调度策略，先进先出
  */
 void start_fs(void);
 
-void my_mkdir(char *filename);
-void my_format(void);
-void my_ls(void);
-void my_exit(void);
-void my_cd(char *filename);
-void my_open(char *filename);
+void my_mkdir(char *filename);//jjx
 void my_create(char *filename);
-void my_read(int fd);
-void my_write(int fd);
-void my_rm(char *filename);
+
+void my_format(void);//plt
+
+void my_ls(void);//lly
+
+void my_exit(void);//cjs
+
+void my_cd(char *filename);//zyt
+void my_open(char *filename);
+
+
+void my_read(int fd);//zym
+
+void my_write(int fd);//xc
+
+void my_rm(char *filename);//xfh
 void my_rmdir(char *filename);
+
 void my_close(int fd);
 void my_help(void);
 
@@ -68,7 +78,7 @@ void my_help(void);
 void init_openfile(void);//从虚拟磁盘载入根目录，超级块等必要块
 void init_root_dir_inode(void);//初始化根目录索引节点，并存入fs_TLB
 void init_inode(fs_size_t i_node_num,int node_type);//初始化i节点
-void get_time(uint16_t *date_time,uint16_t *time);//获取时间
+void get_time(uint16_t *date_time,uint16_t *day_time);//获取时间
 void output_time(uint16_t data_time,uint16_t time);//输出时间
 /********************初始化函数*******************************/
 

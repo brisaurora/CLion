@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/pipe.dir/main.c.o"
+  "CMakeFiles/pipe.dir/main.c.obj"
+  "libpipe.dll.a"
+  "pipe.exe"
+  "pipe.exe.manifest"
   "pipe.pdb"
-  "pipe"
 )
 
 # Per-language clean rules from dependency scanning.

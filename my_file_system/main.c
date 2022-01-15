@@ -104,8 +104,8 @@ int main() {
                         printf("\n");
 
                 }
-                printf("\n********block map***********\n");
-                break;*/
+                printf("\n********block map***********\n");*/
+                break;
         }
     }
 }

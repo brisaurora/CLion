@@ -1,3 +1,1 @@
-"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\my_fs.dir/objects.a
-D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\my_fs.dir/objects.a @CMakeFiles\my_fs.dir\objects1.rsp
-D:\MinGw\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\my_fs.dir/objects.a -Wl,--no-whole-archive -o my_fs.exe -Wl,--out-implib,libmy_fs.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\my_fs.dir\linklibs.rsp
+/usr/bin/cc -g   CMakeFiles/my_fs.dir/main.c.o CMakeFiles/my_fs.dir/init.c.o  -o my_fs 

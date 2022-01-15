@@ -1,0 +1,3 @@
+/home/aurora/drive/hook/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aurora/drive/hook/cmake-build-debug/CMakeFiles/hook.dir
+/home/aurora/drive/hook/cmake-build-debug/CMakeFiles/edit_cache.dir

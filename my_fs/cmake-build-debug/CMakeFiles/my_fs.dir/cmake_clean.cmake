@@ -1,10 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/my_fs.dir/init.c.obj"
-  "CMakeFiles/my_fs.dir/main.c.obj"
-  "libmy_fs.dll.a"
-  "my_fs.exe"
-  "my_fs.exe.manifest"
+  "CMakeFiles/my_fs.dir/main.c.o"
+  "CMakeFiles/my_fs.dir/init.c.o"
   "my_fs.pdb"
+  "my_fs"
 )
 
 # Per-language clean rules from dependency scanning.

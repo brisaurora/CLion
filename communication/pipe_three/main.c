@@ -17,7 +17,6 @@ int main() {
     pipe_sem_read= sem_open("pipe_sem_read",O_CREAT,0666,0);
     pipe_sem_write= sem_open("pipe_sem_write",O_CREAT,0666,1);
     pipe(mypipe);//创建管道
-    //fcntl(mypipe[0],F_SETFL,O_NONBLOCK);
     memset(pid,-1,sizeof(pid));
     char c[65534];
     memset(c,1,65533);
@@ -55,13 +54,7 @@ int main() {
                 rep(j,0,64)
                     write(mypipe[1],c,1000);
                 printf("finish write!\n");
-                //rep(i,0,21e8);
                 sem_post(pipe_sem_write);
-                //sleep(3);
-                //int value;
-                //sem_getvalue(pipe_sem_read,&value);
-                //if(!value)
-                    //sem_post(pipe_sem_read);
             }
         }
 
@@ -76,9 +69,6 @@ int main() {
         printf("try read!\n");
         while (1)
         {
-            //sem_wait(pipe_sem_read);
-            //sem_wait(pipe_sem_read);
-
             memset(OutPipe,0,sizeof(OutPipe));
             read_num=read(mypipe[0],OutPipe,10000);
             printf("output %d\n",read_num);
