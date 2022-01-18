@@ -1,0 +1,3 @@
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\fprintf_or_sprintf.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\fprintf_or_sprintf.dir/objects.a @CMakeFiles\fprintf_or_sprintf.dir\objects1.rsp
+D:\MinGw\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\fprintf_or_sprintf.dir/objects.a -Wl,--no-whole-archive -o fprintf_or_sprintf.exe -Wl,--out-implib,libfprintf_or_sprintf.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\fprintf_or_sprintf.dir\linklibs.rsp
