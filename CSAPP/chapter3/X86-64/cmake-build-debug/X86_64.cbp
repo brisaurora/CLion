@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="X86_64"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="X86_64">
+				<Option output="E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/X86_64.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 X86_64"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="X86_64/fast">
+				<Option output="E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/X86_64.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 X86_64/fast"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/CSAPP/chapter3/X86-64/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="E:/CLion/CSAPP/chapter3/X86-64/main.c">
+			<Option target="X86_64"/>
+		</Unit>
+		<Unit filename="E:/CLion/CSAPP/chapter3/X86-64/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

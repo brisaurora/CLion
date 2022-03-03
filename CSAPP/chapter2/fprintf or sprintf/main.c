@@ -29,18 +29,5 @@ int main() {
     k=powf(k,2);
     sprintf(str, "\nPi 的值 = %f %f", M_PI,k);
     puts(str);
-    //x,&x
-    char *x;
-    d='2';
-    x=&d;
-    test_address(x);
-    return 0;
-}
-void test_address(void *x)
-{
-
-    char *t;
-    t=(char *)x;
-    printf("%p %p %c",x,&x,*t);
 
 }

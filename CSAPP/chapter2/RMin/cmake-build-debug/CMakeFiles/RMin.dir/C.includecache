@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/CLion/CSAPP/chapter2/RMin/main.c
+stdio.h
+-
+limits.h
+E:/CLion/CSAPP/chapter2/RMin/limits.h
+string.h
+E:/CLion/CSAPP/chapter2/RMin/string.h
+math.h
+E:/CLion/CSAPP/chapter2/RMin/math.h
+

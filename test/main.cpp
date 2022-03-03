@@ -25,7 +25,7 @@ int main() {
     char d[1000];
     memset(d,0,1000);
     memcpy(d,&cc,1000);
-    strcpy(d,cc.t,sizeof (cc.t));
+    //strcpy(d,cc.t,sizeof (cc.t));
     while(i<1024) {
         scanf("%c", meg + i);
         if (meg[i] == '\n')
