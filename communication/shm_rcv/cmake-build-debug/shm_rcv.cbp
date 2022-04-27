@@ -8,80 +8,76 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/aurora/drive/communication/shm_rcv/cmake-build-debug"/>
+				<Option working_dir="E:/CLion/communication/shm_rcv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/aurora/drive/communication/shm_rcv/cmake-build-debug"/>
+				<Option working_dir="E:/CLion/communication/shm_rcv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="shm_rcv">
-				<Option output="/home/aurora/drive/communication/shm_rcv/cmake-build-debug/shm_rcv" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/aurora/drive/communication/shm_rcv/cmake-build-debug"/>
+				<Option output="E:/CLion/communication/shm_rcv/cmake-build-debug/shm_rcv.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/CLion/communication/shm_rcv/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 shm_rcv"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 shm_rcv"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="shm_rcv/fast">
-				<Option output="/home/aurora/drive/communication/shm_rcv/cmake-build-debug/shm_rcv" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/aurora/drive/communication/shm_rcv/cmake-build-debug"/>
+				<Option output="E:/CLion/communication/shm_rcv/cmake-build-debug/shm_rcv.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/CLion/communication/shm_rcv/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/MinGw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 shm_rcv/fast"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 shm_rcv/fast"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/aurora/drive/communication/shm_rcv/cmake-build-debug"/>
+				<Option working_dir="E:/CLion/communication/shm_rcv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/home/aurora/drive/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLion/communication/shm_rcv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/aurora/drive/communication/shm_rcv/main.c">
+		<Unit filename="E:/CLion/communication/shm_rcv/main.c">
 			<Option target="shm_rcv"/>
 		</Unit>
-		<Unit filename="/home/aurora/drive/communication/shm_rcv/CMakeLists.txt">
+		<Unit filename="E:/CLion/communication/shm_rcv/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

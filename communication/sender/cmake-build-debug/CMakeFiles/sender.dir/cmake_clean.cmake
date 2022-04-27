@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sender.dir/main.c.o"
+  "CMakeFiles/sender.dir/main.c.obj"
+  "libsender.dll.a"
+  "sender.exe"
+  "sender.exe.manifest"
   "sender.pdb"
-  "sender"
 )
 
 # Per-language clean rules from dependency scanning.

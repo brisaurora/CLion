@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/shm_rcv.dir/main.c.o"
+  "CMakeFiles/shm_rcv.dir/main.c.obj"
+  "libshm_rcv.dll.a"
+  "shm_rcv.exe"
+  "shm_rcv.exe.manifest"
   "shm_rcv.pdb"
-  "shm_rcv"
 )
 
 # Per-language clean rules from dependency scanning.

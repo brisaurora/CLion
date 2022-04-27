@@ -1,1 +1,3 @@
-/usr/bin/cc -g  -pthread CMakeFiles/shm_rcv.dir/main.c.o  -o shm_rcv 
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\shm_rcv.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\shm_rcv.dir/objects.a @CMakeFiles\shm_rcv.dir\objects1.rsp
+D:\MinGw\mingw64\bin\gcc.exe -g -pthread -Wl,--whole-archive CMakeFiles\shm_rcv.dir/objects.a -Wl,--no-whole-archive -o shm_rcv.exe -Wl,--out-implib,libshm_rcv.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\shm_rcv.dir\linklibs.rsp

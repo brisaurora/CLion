@@ -18,8 +18,10 @@ struct S3{
     char b;
 };
 //main
-int main(void )
+int main()
 {
+
+
     string empty("");
     string name("hehehehehehehee");
 
@@ -29,7 +31,7 @@ int main(void )
 
     short *ax= (short *)malloc(sizeof(short ));
     char *ax1= (char *)malloc(sizeof(char ));
-
+    *ax=*ax+*ax1;
     for(auto &c:longstr)
     {
         printf("c：%p\n", &c);
