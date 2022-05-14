@@ -1,0 +1,4 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/aurora/drive/CSAPP/chapter9/mmap
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/aurora/drive/CSAPP/chapter9/mmap/cmake-build-debug

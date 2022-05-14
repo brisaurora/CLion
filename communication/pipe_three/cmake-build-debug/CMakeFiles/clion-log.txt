@@ -1,10 +1,4 @@
-"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" E:\CLion\communication\pipe_three
--- The C compiler identification is GNU 8.1.0
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: D:/MinGw/mingw64/bin/gcc.exe - skipped
--- Detecting C compile features
--- Detecting C compile features - done
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/aurora/drive/communication/pipe_t
 -- Configuring done
 -- Generating done
--- Build files have been written to: E:/CLion/communication/pipe_three/cmake-build-debug
+-- Build files have been written to: /home/aurora/drive/communication/pipe_t/cmake-build-debug

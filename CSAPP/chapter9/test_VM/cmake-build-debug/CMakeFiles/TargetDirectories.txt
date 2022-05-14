@@ -1,0 +1,3 @@
+E:/CLion/CSAPP/chapter9/test_VM/cmake-build-debug/CMakeFiles/test_VM.dir
+E:/CLion/CSAPP/chapter9/test_VM/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/CLion/CSAPP/chapter9/test_VM/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+/home/aurora/drive/CSAPP/chapter8/sigjmp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aurora/drive/CSAPP/chapter8/sigjmp/cmake-build-debug/CMakeFiles/sigjmp.dir
+/home/aurora/drive/CSAPP/chapter8/sigjmp/cmake-build-debug/CMakeFiles/edit_cache.dir

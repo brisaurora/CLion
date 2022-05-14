@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aurora/drive/communication/pipe_t/main.c
+stdio.h
+-
+unistd.h
+-
+string.h
+/home/aurora/drive/communication/pipe_t/string.h
+semaphore.h
+/home/aurora/drive/communication/pipe_t/semaphore.h
+fcntl.h
+-
+

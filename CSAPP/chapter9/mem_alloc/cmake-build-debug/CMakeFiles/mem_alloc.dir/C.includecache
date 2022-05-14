@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/CLion/CSAPP/chapter9/mem_alloc/main.c
+stdio.h
+-
+string.h
+E:/CLion/CSAPP/chapter9/mem_alloc/string.h
+malloc.h
+E:/CLion/CSAPP/chapter9/mem_alloc/malloc.h
+
