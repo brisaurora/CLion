@@ -1,0 +1,3 @@
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\protect_and_public.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\protect_and_public.dir/objects.a @CMakeFiles\protect_and_public.dir\objects1.rsp
+D:\MinGw\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\protect_and_public.dir/objects.a -Wl,--no-whole-archive -o protect_and_public.exe -Wl,--out-implib,libprotect_and_public.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\protect_and_public.dir\linklibs.rsp

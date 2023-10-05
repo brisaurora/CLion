@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/readdir.dir/main.c.o  -o readdir 

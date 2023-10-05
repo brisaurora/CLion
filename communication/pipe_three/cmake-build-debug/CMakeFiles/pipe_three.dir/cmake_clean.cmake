@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/pipe_three.dir/main.c.o"
+  "CMakeFiles/pipe_three.dir/main.c.obj"
+  "libpipe_three.dll.a"
+  "pipe_three.exe"
+  "pipe_three.exe.manifest"
   "pipe_three.pdb"
-  "pipe_three"
 )
 
 # Per-language clean rules from dependency scanning.

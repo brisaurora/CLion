@@ -1,0 +1,3 @@
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\num_div.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\num_div.dir/objects.a @CMakeFiles\num_div.dir\objects1.rsp
+D:\MinGw\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\num_div.dir/objects.a -Wl,--no-whole-archive -o num_div.exe -Wl,--out-implib,libnum_div.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\num_div.dir\linklibs.rsp

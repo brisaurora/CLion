@@ -1,0 +1,3 @@
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\dull_test.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\dull_test.dir/objects.a @CMakeFiles\dull_test.dir\objects1.rsp
+D:\MinGw\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\dull_test.dir/objects.a -Wl,--no-whole-archive -o dull_test.exe -Wl,--out-implib,libdull_test.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\dull_test.dir\linklibs.rsp

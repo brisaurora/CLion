@@ -1,0 +1,3 @@
+E:/CLion/CSAPP/exam/2022/program_up/cmake-build-debug/CMakeFiles/program_up.dir
+E:/CLion/CSAPP/exam/2022/program_up/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/CLion/CSAPP/exam/2022/program_up/cmake-build-debug/CMakeFiles/rebuild_cache.dir

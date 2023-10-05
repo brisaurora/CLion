@@ -1,0 +1,3 @@
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\my_project.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\my_project.dir/objects.a @CMakeFiles\my_project.dir\objects1.rsp
+D:\MinGw\mingw64\bin\g++.exe  -fPIC -mcmodel=large -g -Wl,--whole-archive CMakeFiles\my_project.dir/objects.a -Wl,--no-whole-archive -o my_project.exe -Wl,--out-implib,libmy_project.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\my_project.dir\linklibs.rsp

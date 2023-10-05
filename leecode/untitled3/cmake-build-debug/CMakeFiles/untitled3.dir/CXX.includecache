@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/CLion/leecode/untitled3/data1.cpp
+data1.h
+E:/CLion/leecode/untitled3/data1.h
+
+E:/CLion/leecode/untitled3/data1.h
+
+E:/CLion/leecode/untitled3/main.cpp
+math.h
+-
+stdio.h
+-
+time.h
+-
+iostream
+-
+data1.h
+E:/CLion/leecode/untitled3/data1.h
+

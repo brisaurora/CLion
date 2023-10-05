@@ -1,0 +1,3 @@
+/home/aurora/drive/CSAPP/Tinyserve/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aurora/drive/CSAPP/Tinyserve/cmake-build-debug/CMakeFiles/tinyserver_master.dir
+/home/aurora/drive/CSAPP/Tinyserve/cmake-build-debug/CMakeFiles/edit_cache.dir

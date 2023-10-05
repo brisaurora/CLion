@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/CLion/codeforce/simple/watermelon/main.cpp
+iostream
+-
+bits/stdc++.h
+E:/CLion/codeforce/simple/watermelon/bits/stdc++.h
+

@@ -1,0 +1,3 @@
+"D:\Program\clion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\three_num.dir/objects.a
+D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\three_num.dir/objects.a @CMakeFiles\three_num.dir\objects1.rsp
+D:\MinGw\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\three_num.dir/objects.a -Wl,--no-whole-archive -o three_num.exe -Wl,--out-implib,libthree_num.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\three_num.dir\linklibs.rsp

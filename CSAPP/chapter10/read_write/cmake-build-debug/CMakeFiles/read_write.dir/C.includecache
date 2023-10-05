@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/CLion/CSAPP/chapter10/read_write/main.c
+stdio.h
+-
+fcntl.h
+E:/CLion/CSAPP/chapter10/read_write/fcntl.h
+

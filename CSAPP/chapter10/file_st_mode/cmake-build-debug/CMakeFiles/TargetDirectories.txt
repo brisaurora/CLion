@@ -1,0 +1,3 @@
+/home/aurora/drive/CSAPP/chapter10/file_st_mode/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aurora/drive/CSAPP/chapter10/file_st_mode/cmake-build-debug/CMakeFiles/file_st_mode.dir
+/home/aurora/drive/CSAPP/chapter10/file_st_mode/cmake-build-debug/CMakeFiles/edit_cache.dir
